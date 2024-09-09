@@ -28,18 +28,12 @@ class RepositoriesViewModel
         viewModelScope.launch {
             _state.update { it.copy(isLoading = true) }
 
-            _state.update { it.copy(
-                repos = getRepositoryNodesUseCase(),
-                isLoading = false
-            ) }
-        }
-    }
-
-    fun selectedRepo(code: String) {
-        viewModelScope.launch {
-            _state.update { it.copy(
-                //selectedCountry =  getCountryUseCase.execute(code)
-            ) }
+            _state.update {
+                it.copy(
+                    repos = getRepositoryNodesUseCase(),
+                    isLoading = false
+                )
+            }
         }
     }
 

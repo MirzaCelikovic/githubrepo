@@ -1,6 +1,5 @@
 package com.toptal.githubrepo.data.network
 
-import com.toptal.githubrepo.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 

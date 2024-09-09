@@ -33,7 +33,7 @@ class RepositoryDetailsViewModel
     }
 
     data class RepositoryDetailsState(
-        val repoDetails: RepositoryDetails = RepositoryDetails(),
+        val repoDetails: RepositoryDetails = RepositoryDetails.empty(),
         val isLoading: Boolean = false
     )
 }

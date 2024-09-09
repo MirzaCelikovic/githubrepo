@@ -71,7 +71,7 @@ fun RepositoryDetailsScreen(
                         )
                     }
                 }
-                
+
                 stickyHeader {
                     Spacer(modifier = modifier.padding(16.dp))
                     Text(
@@ -96,7 +96,6 @@ fun RepositoryDetailsScreen(
                     HorizontalDivider()
                 }
             }
-
         }
     }
 }

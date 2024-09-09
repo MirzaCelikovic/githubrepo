@@ -7,6 +7,9 @@ import com.toptal.githubrepo.domain.model.repository_details.RepositoryDetails
 import com.toptal.githubrepo.domain.usecases.repository_details.RepositoryDetailsClient
 import javax.inject.Inject
 
+/**
+ * No error handling in place, would use Result class and combine it with state for loading, success and error states
+ */
 class RepositoryDetailsImpl
 @Inject constructor(
     private val apolloClient: ApolloClient,

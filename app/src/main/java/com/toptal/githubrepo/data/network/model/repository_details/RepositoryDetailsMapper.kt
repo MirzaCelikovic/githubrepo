@@ -23,5 +23,4 @@ class RepositoryDetailsMapper @Inject constructor(): DomainMapper<RepositoryDeta
     override fun mapFromDomainModel(domainModel: RepositoryDetails): RepositoryDetailsQuery.Repository {
         TODO("Not yet implemented")
     }
-
 }
