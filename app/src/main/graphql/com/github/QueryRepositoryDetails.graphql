@@ -1,0 +1,22 @@
+query RepositoryDetails($orgName: String!, $repoName: String!) {
+    repository(owner: $orgName, name: $repoName) {
+        openIssues: issues(states: [OPEN], first: 100) {
+            totalCount
+            nodes {
+                title
+            }
+        }
+        closedIssues: issues(states: [CLOSED], first: 100) {
+            totalCount
+        }
+        openPullRequests: pullRequests(states: [OPEN], first: 100) {
+            totalCount
+            nodes {
+                title
+            }
+        }
+        closedPullRequests: pullRequests(states: [CLOSED], first: 100) {
+            totalCount
+        }
+    }
+}

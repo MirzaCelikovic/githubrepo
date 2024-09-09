@@ -1,0 +1,18 @@
+query Repositories($orgName: String!, $afterCursor: String) {
+    organization(login: $orgName) {
+        repositories(first: 100, after: $afterCursor) {
+            edges {
+                node {
+                    name
+                    description
+                    isPrivate
+                    url
+                }
+            }
+            pageInfo {
+                endCursor
+                hasNextPage
+            }
+        }
+    }
+}
