@@ -3,9 +3,7 @@ package com.toptal.githubrepo.presentation.ui.repository_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.toptal.githubrepo.domain.model.repository_details.RepositoryDetails
-import com.toptal.githubrepo.domain.model.repository_nodes.RepositoryNode
 import com.toptal.githubrepo.domain.usecases.repository_details.GetRepositoryDetailsUseCase
-import com.toptal.githubrepo.presentation.ui.repositories.RepositoriesViewModel.RepositoriesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

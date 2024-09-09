@@ -39,7 +39,6 @@ class RepositoriesViewModel
 
     data class RepositoriesState(
         val repos: List<RepositoryNode> = emptyList(),
-        val isLoading: Boolean = false,
-        val selectedCountry: RepositoryNode? = null
+        val isLoading: Boolean = false
     )
 }
