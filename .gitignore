@@ -7,8 +7,12 @@
 /.idea/workspace.xml
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
+/.idea/vcs.xml
 .DS_Store
 /build
+/data/build
+/presentation/build
+/domain/build
 /captures
 .externalNativeBuild
 .cxx

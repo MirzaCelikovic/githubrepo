@@ -1,27 +1,34 @@
-import java.util.Properties
-
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.apollo.graphql)
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
+apollo {
+    service("service") {
+        packageName.set("com.github")
+    }
+}
+
 android {
-    namespace = "com.toptal.githubrepo"
+    buildFeatures {
+        buildConfig = true
+    }
+
+    namespace = "com.toptal.data"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.toptal.githubrepo"
         minSdk = 29
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+
+        val githubToken: String by rootProject.extra
+        buildConfigField("String", "GITHUB_TOKEN", "\"${githubToken}\"")
+        buildConfigField("String", "GITHUB_API", "\"https://api.github.com/graphql\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -40,18 +47,17 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-    implementation(project(":data"))
     implementation(project(":domain"))
-    implementation(project(":presentation"))
 
+    implementation(libs.apollo.runtime)
+    implementation(libs.logging.interceptor)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }

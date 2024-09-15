@@ -1,27 +1,19 @@
-import java.util.Properties
-
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.jetbrains.kotlin.android)
     id("dagger.hilt.android.plugin")
     kotlin("kapt")
 }
 
 android {
-    namespace = "com.toptal.githubrepo"
+    namespace = "com.toptal.domain"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.toptal.githubrepo"
         minSdk = 29
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-        vectorDrawables {
-            useSupportLibrary = true
-        }
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -40,18 +32,13 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
 }
 
 dependencies {
-    implementation(project(":data"))
-    implementation(project(":domain"))
-    implementation(project(":presentation"))
-
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
 }
