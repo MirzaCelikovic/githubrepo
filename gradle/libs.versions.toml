@@ -15,7 +15,7 @@ loggingInterceptor = "4.12.0"
 navigationCompose = "2.8.0"
 appcompat = "1.7.0"
 material = "1.12.0"
-moduleGraphVersion = "0.10.1"
+mermaidVersoin = "0.10.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -48,5 +48,5 @@ jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = 
 apollo-graphql = { id = "com.apollographql.apollo3", version.ref = "apolloRuntime" }
 android-hilt = { id = "com.google.dagger.hilt.android", version.strictly = "2.51.1"}
 android-library = { id = "com.android.library", version.ref = "agp" }
-module-graph = { id = "dev.iurysouza.modulegraph", version.ref = "moduleGraphVersion" }
+mermaid-graph = { id = "dev.iurysouza.modulegraph", version.ref = "mermaidVersoin" }
 
