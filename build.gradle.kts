@@ -6,6 +6,7 @@ plugins {
     alias(libs.plugins.jetbrains.kotlin.android) apply false
     alias(libs.plugins.android.hilt) apply false
     alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.mermaid.graph) apply false
 }
 
 val localProperties = Properties()

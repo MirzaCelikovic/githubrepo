@@ -1,24 +1,17 @@
-import java.util.Properties
+import dev.iurysouza.modulegraph.LinkText
+import dev.iurysouza.modulegraph.ModuleType
+import dev.iurysouza.modulegraph.Orientation
+import dev.iurysouza.modulegraph.Theme
 
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
-    alias(libs.plugins.apollo.graphql)
-    kotlin("kapt")
     id("dagger.hilt.android.plugin")
-}
-
-apollo {
-    service("service") {
-        packageName.set("com.github")
-    }
+    id("dev.iurysouza.modulegraph")
+    kotlin("kapt")
 }
 
 android {
-    buildFeatures {
-        buildConfig = true
-    }
-
     namespace = "com.toptal.githubrepo"
     compileSdk = 34
 
@@ -28,10 +21,6 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
-        val githubToken: String by rootProject.extra
-        buildConfigField("String", "GITHUB_TOKEN", "\"${githubToken}\"")
-        buildConfigField("String", "GITHUB_API", "\"https://api.github.com/graphql\"")
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -55,12 +44,6 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
-    buildFeatures {
-        compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = "1.5.1"
-    }
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
@@ -68,31 +51,29 @@ android {
     }
 }
 
-dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.lifecycle.runtime.ktx)
-    implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+moduleGraphConfig {
+    readmePath.set("${rootDir}/README.md")
+    heading.set("### Module Graph")
+    theme.set(
+        Theme.BASE(
+            mapOf(
+                "primaryTextColor" to "#fff",
+                "primaryColor" to "#5a4f7c",
+                "primaryBorderColor" to "#5a4f7c",
+                "lineColor" to "#f5a623",
+                "tertiaryColor" to "#40375c",
+                "fontSize" to "12px",
+            ),
+            focusColor = "#FA8140"
+        ),
+    )
+}
 
+dependencies {
+    implementation(project(":data"))
+    implementation(project(":domain"))
+    implementation(project(":presentation"))
 
     implementation(libs.hilt.android)
-    implementation (libs.androidx.hilt.navigation.compose)
     kapt(libs.hilt.android.compiler)
-    implementation(libs.apollo.runtime)
-    implementation(libs.logging.interceptor)
-
-    implementation(libs.androidx.navigation.compose)
-    implementation(libs.androidx.activity.compose)
-
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
