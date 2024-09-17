@@ -9,6 +9,7 @@ class RepositoryNodeMapper @Inject constructor():
     DomainMapper<RepositoriesQuery.Node, RepositoryNode> {
     override fun mapToDomainModel(model: RepositoriesQuery.Node): RepositoryNode {
         return RepositoryNode(
+            viewerStarred = model.viewerHasStarred,
             name = model.name,
             description = model.description.orEmpty(),
             url = model.url.toString()

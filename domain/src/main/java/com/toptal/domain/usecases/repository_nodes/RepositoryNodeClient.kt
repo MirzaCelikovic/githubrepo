@@ -7,4 +7,8 @@ import com.toptal.domain.model.repository_nodes.RepositoryNode
  */
 interface RepositoryNodeClient {
     suspend fun getRepositories(): List<RepositoryNode>
+
+    suspend fun addStar(repoId: String): Boolean
+
+    suspend fun removeStar(repoId: String): Boolean
 }

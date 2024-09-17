@@ -1,6 +1,7 @@
 package com.toptal.presentation.ui.repository_details
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -9,8 +10,13 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.outlined.MailOutline
+import androidx.compose.material.icons.outlined.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -69,6 +75,18 @@ fun RepositoryDetailsScreen(
                             text = "Closed PRs count: ${state.repoDetails.closedPRsCount}",
                             style = MaterialTheme.typography.bodyLarge
                         )
+
+                        Box(modifier = Modifier
+                            .clickable {
+                                viewModel.toggleStar()
+                            }
+                        ) {
+                            if (state.stared) {
+                                Icon(Icons.Filled.Star, "star")
+                            } else {
+                                Icon(Icons.Outlined.MailOutline, "star")
+                            }
+                        }
                     }
                 }
 

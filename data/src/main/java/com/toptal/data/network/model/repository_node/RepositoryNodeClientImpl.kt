@@ -1,6 +1,9 @@
 package com.toptal.data.network.model.repository_node
 
+import android.util.Log
 import com.apollographql.apollo3.ApolloClient
+import com.github.AddStarMutation
+import com.github.RemoveStarMutation
 import com.github.RepositoriesQuery
 import com.toptal.domain.ORGANIZATION_NAME
 import com.toptal.domain.model.repository_nodes.RepositoryNode
@@ -26,5 +29,32 @@ class RepositoryNodeClientImpl
                ?.mapNotNull { it?.node }
                ?.map { mapper.mapToDomainModel(it) }
                ?: emptyList()
+    }
+
+    override suspend fun addStar(repoId: String): Boolean {
+       val starred =  apolloClient
+            .mutation(AddStarMutation(repoId))
+            .execute()
+           .also {
+               Log.e("Erros;:", "${it.errors}")
+           }
+            .data
+            ?.addStar
+            ?.starrable
+            ?.viewerHasStarred
+
+        return true
+    }
+
+    override suspend fun removeStar(repoId: String): Boolean {
+        apolloClient
+            .mutation(RemoveStarMutation(repoId))
+            .execute()
+            .data
+            ?.removeStar
+            ?.starrable
+            ?.viewerHasStarred == false
+
+        return false
     }
 }
