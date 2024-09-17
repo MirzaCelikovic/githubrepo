@@ -1,6 +1,8 @@
 package com.toptal.domain.model.repository_details
 
 data class RepositoryDetails(
+    val id: String,
+    val viewerStarred: Boolean,
     val openIssuesCount: Int,
     val closedIssuesCount: Int,
     val openPRsCount: Int,
@@ -11,6 +13,8 @@ data class RepositoryDetails(
     companion object {
         fun empty(): RepositoryDetails {
             return RepositoryDetails(
+                id = "",
+                viewerStarred = false,
                 openIssuesCount = 0,
                 closedIssuesCount = 0,
                 openPRsCount = 0,

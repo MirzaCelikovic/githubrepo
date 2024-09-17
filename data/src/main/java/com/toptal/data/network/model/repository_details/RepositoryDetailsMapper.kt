@@ -12,6 +12,8 @@ class RepositoryDetailsMapper @Inject constructor():
     DomainMapper<RepositoryDetailsQuery.Repository, RepositoryDetails> {
     override fun mapToDomainModel(model: RepositoryDetailsQuery.Repository): RepositoryDetails {
         return RepositoryDetails(
+            id = model.id,
+            viewerStarred = model.viewerHasStarred,
             openIssuesCount = model.openIssues.totalCount,
             closedIssuesCount = model.closedIssues.totalCount,
             openPRsCount = model.openPullRequests.totalCount,

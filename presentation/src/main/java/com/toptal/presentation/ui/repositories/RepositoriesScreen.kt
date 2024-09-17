@@ -9,8 +9,12 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Menu
+import androidx.compose.material.icons.filled.Star
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -18,6 +22,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.toptal.domain.model.repository_nodes.RepositoryNode
@@ -30,7 +35,9 @@ fun RepositoriesScreen(
 ) {
     val state by viewModel.state.collectAsState()
 
-    Box(modifier = modifier.fillMaxSize().padding(vertical = 48.dp, horizontal = 8.dp)) {
+    Box(modifier = modifier
+        .fillMaxSize()
+        .padding(vertical = 48.dp, horizontal = 8.dp)) {
         if (state.isLoading) {
             CircularProgressIndicator(
                 modifier = Modifier.align(Alignment.Center)
@@ -58,11 +65,16 @@ fun RepoItem(
         modifier = modifier
             .padding(8.dp)
             .clickable {
-                onRepoClick(repo.name)
+                if (repo.isEvenNoOfLetters()) {
+                    onRepoClick(repo.name)
+                }
             },
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         Text(text = repo.name, style = MaterialTheme.typography.headlineSmall, maxLines = 1)
         Text(text = repo.url, style = MaterialTheme.typography.bodySmall)
+        if (repo.viewerStarred) {
+            Icon(Icons.Filled.Star, "star")
+        }
     }
 }
