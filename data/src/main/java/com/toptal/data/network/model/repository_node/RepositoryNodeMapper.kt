@@ -11,7 +11,8 @@ class RepositoryNodeMapper @Inject constructor():
         return RepositoryNode(
             name = model.name,
             description = model.description.orEmpty(),
-            url = model.url.toString()
+            url = model.url.toString(),
+            stargazersCount = model.stargazerCount
         )
     }
 

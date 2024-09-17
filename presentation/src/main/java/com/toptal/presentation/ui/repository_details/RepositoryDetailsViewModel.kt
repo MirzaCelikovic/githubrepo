@@ -3,7 +3,7 @@ package com.toptal.presentation.ui.repository_details
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.toptal.domain.model.repository_details.RepositoryDetails
-import com.toptal.domain.usecases.repository_details.GetRepositoryDetailsUseCase
+import com.toptal.domain.usecases.repositories.repository_details.GetRepositoryDetailsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

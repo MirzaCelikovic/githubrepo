@@ -1,11 +1,15 @@
 package com.toptal.presentation.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.toptal.presentation.ui.repositories.RepositoriesScreen
 import com.toptal.presentation.ui.repository_details.RepositoryDetailsScreen
+import com.toptal.presentation.ui.repository_details.RepositoryDetailsViewModel
 
 /**
  * Viewmodel and state initializations should be done here instead passed in constructors,
@@ -32,7 +36,13 @@ fun SetupNavGraph(
 
         composable(route = Screen.RepositoryDetails.route) {
             val repoName = it.arguments?.getString("repositoryName")!!
-            RepositoryDetailsScreen(repositoryName = repoName)
+            val repDetailsViewModel = hiltViewModel<RepositoryDetailsViewModel>()
+            val state by repDetailsViewModel.state.collectAsState()
+            RepositoryDetailsScreen(
+                repositoryName = repoName,
+                state = state,
+                fetchDetails = repDetailsViewModel::fetchRepoDetails
+            )
         }
     }
 }

@@ -1,5 +1,6 @@
 package com.toptal.presentation.ui.repository_details
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -16,27 +17,25 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import com.toptal.domain.model.repository_details.RepositoryDetails
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RepositoryDetailsScreen(
     modifier: Modifier = Modifier,
-    viewModel: RepositoryDetailsViewModel = hiltViewModel(),
-    repositoryName: String
+    repositoryName: String,
+    state: RepositoryDetailsViewModel.RepositoryDetailsState,
+    fetchDetails: (repositoryName: String) -> Unit
 ) {
 
-    val state by viewModel.state.collectAsState()
-
     LaunchedEffect(Unit) {
-        viewModel.fetchRepoDetails(repositoryName)
+        fetchDetails(repositoryName)
     }
 
     Box(modifier = modifier.fillMaxSize()) {
@@ -135,5 +134,17 @@ fun ListItem(
         modifier = modifier.padding(vertical = 4.dp),
         text = itemText,
         style = MaterialTheme.typography.bodySmall
+    )
+}
+
+@SuppressLint("UnrememberedMutableState")
+@Preview
+@Composable
+fun RepositoryDetailsScreenPreview() {
+    RepositoryDetailsScreen(
+        modifier = Modifier.background(color = Color.White),
+        repositoryName = "repo",
+        state = RepositoryDetailsViewModel.RepositoryDetailsState(repoDetails = RepositoryDetails.empty(), isLoading = false),
+        fetchDetails = { "s" }
     )
 }
