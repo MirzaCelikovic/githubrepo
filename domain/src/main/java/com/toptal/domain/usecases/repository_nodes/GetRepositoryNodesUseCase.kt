@@ -7,6 +7,5 @@ class GetRepositoryNodesUseCase
 @Inject constructor(private val client: RepositoryNodeClient) {
     suspend operator fun invoke(): List<RepositoryNode> {
         return client.getRepositories()
-            .sortedWith(compareBy(String.CASE_INSENSITIVE_ORDER) { it.name })
     }
 }
